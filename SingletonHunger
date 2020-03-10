@@ -1,0 +1,43 @@
+public class SingletonHunger {
+    private static SingletonHunger instance = new SingletonHunger();
+
+    private SingletonHunger(){
+        System.out.println("singletonHunger");
+    }
+
+    public static SingletonHunger getInstance() {
+        System.out.println("singletonHunger.getInstance");
+
+        return instance;
+    }
+
+
+    public static void main(String[] args) {
+
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName()+":"+SingletonHunger.getInstance().hashCode());
+            }
+        },"t1");
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                System.out.println(Thread.currentThread().getName()+":"+SingletonHunger.getInstance().hashCode());
+            }
+        },"t2");
+        Thread t3 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                System.out.println(Thread.currentThread().getName()+":"+SingletonHunger.getInstance().hashCode());
+            }
+        },"t3");
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+
+}
